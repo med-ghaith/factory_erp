@@ -6,7 +6,7 @@
     <div class="container-fluid">
         <div class="copyright float-right pt-5 text-sm">
             Made with <i class="material-icons">local_cafe</i>
-            | Production Management System by <a href="https://github.com/mrezadit"><b>mrezadit</b></a>
+            | Production Management System by <a href="https://github.com"><b>Jawher</b></a>
         </div>
     </div>
 </footer>

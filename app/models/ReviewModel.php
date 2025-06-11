@@ -9,13 +9,14 @@ class ReviewModel extends Model {
     }
 
     public function create($data) {
-        $query = "INSERT INTO {$this->table} (history_id, quality_score, efficiency_score, safety_score, remark) 
-                  VALUES (:history_id, :quality_score, :efficiency_score, :safety_score, :remark)";
+        $query = "INSERT INTO {$this->table} (history_id, criteria_g, criteria_f, criteria_n, remarque) 
+                  VALUES (:history_id, :criteria_g, :criteria_f, :criteria_n, :remarque)";
         return $this->executeQuery($query, $data);
     }
 
     public function getByHistory($history_id) {
-        $query = "SELECT r.*, h.machine_id, h.staff_id, m.name as machine_name, s.matricule as staff_matricule
+        $query = "SELECT r.*, h.machine_id, h.staff_id, m.name as machine_name, 
+                         s.matricule as staff_matricule, h.start_time, h.end_time
                   FROM reviews r
                   JOIN history h ON h.id = r.history_id
                   JOIN machines m ON m.id = h.machine_id
@@ -26,7 +27,8 @@ class ReviewModel extends Model {
     }
 
     public function getAllWithDetails() {
-        $query = "SELECT r.*, h.machine_id, h.staff_id, m.name as machine_name, s.matricule as staff_matricule
+        $query = "SELECT r.*, h.machine_id, h.staff_id, m.name as machine_name, 
+                         s.matricule as staff_matricule, h.start_time, h.end_time
                   FROM reviews r
                   JOIN history h ON h.id = r.history_id
                   JOIN machines m ON m.id = h.machine_id
@@ -35,5 +37,6 @@ class ReviewModel extends Model {
         $stmt = $this->executeQuery($query);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+    
 }
 ?>

@@ -1,6 +1,7 @@
 <?php
 require_once 'Controller.php';
 require_once __DIR__ . '/../models/MachineModel.php';
+require_once __DIR__ . '/../models/HistoryModel.php';
 
 class MachinesController extends Controller {
     private $machineModel;
@@ -8,13 +9,23 @@ class MachinesController extends Controller {
     public function __construct() {
         parent::__construct();
         $this->machineModel = new MachineModel();
+      
     }
 
     public function index() {
         //$this->requireLogin();
         $machines = $this->machineModel->getAll();
-       
-        $this->view('machines/index', ['machines' => $machines]);
+        $historyModel = new HistoryModel(); // Add this line
+    $machineHistories = [];
+    
+    foreach ($machines as $machine) {
+        $machineHistories[$machine['id']] = $historyModel->getHistoryByMachine($machine['id']);
+    }
+    
+    $this->view('machines/index', [
+        'machines' => $machines,
+        'machineHistories' => $machineHistories
+    ]);
     }
     protected function validateMachineData($data) {
         $errors = [];

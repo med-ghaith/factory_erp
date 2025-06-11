@@ -14,32 +14,46 @@ class ReviewController extends Controller {
     }
 
     public function index() {
-        $this->requireLogin();
+       // $this->requireLogin();
         $reviews = $this->reviewModel->getAllWithDetails();
+        
         $this->view('reviews/index', ['reviews' => $reviews]);
+    }
+    public function selectHistory() {
+        // $this->requireLogin();
+        $histories = $this->historyModel->getUnreviewedHistories();
+        $this->view('reviews/select-history', ['histories' => $histories]);
     }
 
     public function create($history_id) {
-        $this->requireAdmin();
+      //  $this->requireAdmin();
         
+        $history = $this->historyModel->getById($history_id);
+       
+        if (!$history) {
+            $this->redirect('/reviews');
+        }
+
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $data = [
                 'history_id' => $history_id,
-                'quality_score' => $_POST['quality_score'],
-                'efficiency_score' => $_POST['efficiency_score'],
-                'safety_score' => $_POST['safety_score'],
-                'remark' => $_POST['remark']
+                'criteria_g' => $_POST['criteria_g'],
+                'criteria_f' => $_POST['criteria_f'],
+                'criteria_n' => $_POST['criteria_n'],
+                'remarque' => $_POST['remarque']
             ];
             
             if ($this->reviewModel->create($data)) {
+                $_SESSION['success'] = 'Review created successfully';
                 $this->redirect('/reviews');
             } else {
                 $error = "Failed to create review";
-                $history = $this->historyModel->getById($history_id);
-                $this->view('reviews/create', ['error' => $error, 'history' => $history]);
+                $this->view('reviews/create', [
+                    'error' => $error,
+                    'history' => $history
+                ]);
             }
         } else {
-            $history = $this->historyModel->getById($history_id);
             $this->view('reviews/create', ['history' => $history]);
         }
     }
@@ -47,6 +61,9 @@ class ReviewController extends Controller {
     public function viewReview($id) {
         $this->requireLogin();
         $review = $this->reviewModel->getByHistory($id);
+        if (!$review) {
+            $this->redirect('/reviews');
+        }
         $this->view('reviews/view', ['review' => $review]);
     }
 }

@@ -56,7 +56,7 @@ function activeClass($segment) {
                         <?= htmlspecialchars($user['name']) ?>
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end">
-                        <li><a class="dropdown-item" href="<?= base_url('auth/logout') ?>">Logout</a></li>
+                        <li><a class="dropdown-item" href="<?= base_url('/logout') ?>">Logout</a></li>
                     </ul>
                 </li>
             </ul>
@@ -99,7 +99,7 @@ function activeClass($segment) {
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link <?= activeClass('report') ?>" href="<?= base_url('report') ?>">
+                    <a class="nav-link <?= activeClass('reviews') ?>" href="<?= base_url('reviews') ?>">
                         <i class="bi bi-file-text"></i> Report
                     </a>
                 </li>

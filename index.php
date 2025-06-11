@@ -82,16 +82,7 @@ switch ($controller_name) {
             $controller->index();
         }
         break;
-    case 'reviews':
-        $controller = new ReviewController();
-        if ($action === 'create' && isset($param)) {
-            $controller->create($param);
-        } elseif ($action === 'view' && isset($param)) {
-            $controller->viewReview($param);
-        } else {
-            $controller->index();
-        }
-        break;
+    
     case 'planning':
         $controller = new PlanningController();
         if ($action === 'create' && $_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -126,6 +117,19 @@ switch ($controller_name) {
             $controller->index();
         }
         break;
+        case 'reviews':
+            $controller = new ReviewController();
+            if ($action === 'select-history') {
+                $controller->selectHistory();
+            } elseif ($action === 'create' && isset($param)) {
+                $controller->create($param);
+            } elseif ($action === 'view' && isset($param)) {
+                $controller->viewReview($param);
+            } else {
+                $controller->index();
+            }
+            break;
+            
     default:
         header("HTTP/1.0 404 Not Found");
         echo "Page not found";

@@ -38,5 +38,26 @@ class HistoryModel extends Model {
         $stmt = $this->executeQuery($query, ['machine_id' => $machine_id]);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    public function getUnreviewedHistories() {
+        $query = "SELECT h.*, m.name as machine_name, s.matricule as staff_matricule
+                  FROM history h
+                  JOIN machines m ON m.id = h.machine_id
+                  JOIN staff s ON s.id = h.staff_id
+                  LEFT JOIN reviews r ON r.history_id = h.id
+                  WHERE r.id IS NULL
+                  ORDER BY h.start_time DESC";
+        $stmt = $this->executeQuery($query);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    public function getHistoryByMachine($machine_id) {
+        $query = "SELECT h.*, s.matricule as staff_matricule 
+                  FROM history h
+                  JOIN staff s ON s.id = h.staff_id
+                  WHERE h.machine_id = :machine_id
+                  ORDER BY h.start_time DESC";
+        $stmt = $this->executeQuery($query, ['machine_id' => $machine_id]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 }
 ?>
