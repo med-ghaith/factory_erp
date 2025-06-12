@@ -80,7 +80,7 @@ function activeClass($segment) {
                 </li>
                 <li class="nav-item">
                     <a class="nav-link <?= activeClass('stock') ?>" href="<?= base_url('stock') ?>">
-                        <i class="bi bi-box"></i> Stock
+                        <i class="bi bi-box"></i> Stock Management
                     </a>
                 </li>
                 <li class="nav-item">

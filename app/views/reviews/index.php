@@ -14,9 +14,9 @@
                         <tr>
                             <th>Machine</th>
                             <th>Staff</th>
-                           
+                           <th>remarks</th>
                             <th>Date</th>
-                            <th>Actions</th>
+                           
                         </tr>
                     </thead>
                     <tbody>
@@ -24,13 +24,10 @@
                         <tr>
                             <td><?php echo htmlspecialchars($review['machine_name']); ?></td>
                             <td><?php echo htmlspecialchars($review['staff_matricule']); ?></td>
+                            <td><?php echo htmlspecialchars($review['remarque']); ?></td>
                             
                             <td><?php echo date('Y-m-d', strtotime($review['created_at'])); ?></td>
-                            <td>
-                                <a href="/reviews/view/<?php echo $review['history_id']; ?>" class="btn btn-sm btn-info">
-                                    <i class="bi bi-eye"></i> View
-                                </a>
-                            </td>
+                           
                         </tr>
                         <?php endforeach; ?>
                     </tbody>

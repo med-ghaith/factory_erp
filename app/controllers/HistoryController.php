@@ -29,6 +29,14 @@ class HistoryController extends Controller {
       //  $this->requireLogin();
         
       if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $usedQuantity = (int)$_POST['used_quantity'];
+        // Get current stock quantity
+    $stockItem = $this->stockModel->getById($_POST['stock_id']);
+    if (!$stockItem || $stockItem['quantity'] < $usedQuantity) {
+        $error = "Insufficient stock quantity.";
+        return $this->loadFormData($error);
+    }
+
         $data = [
             'machine_id' => $_POST['machine_id'],
             'staff_id' => $_POST['staff_id'],
@@ -39,6 +47,7 @@ class HistoryController extends Controller {
         ];
 
         if ($this->historyModel->create($data)) {
+            $this->stockModel->deductQuantity($_POST['stock_id'], $usedQuantity);
             $this->redirect('/history');
         } else {
             $error = "Failed to create history record";

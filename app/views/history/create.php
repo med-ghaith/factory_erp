@@ -15,7 +15,7 @@
             <form method="POST" action="/history/create">
                 <div class="row">
                     <!-- Machine -->
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <div class="mb-3">
                             <label for="machine_id" class="form-label">Machine</label>
                             <select class="form-select" id="machine_id" name="machine_id" required>
@@ -31,7 +31,7 @@
                     </div>
 
                     <!-- Staff -->
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <div class="mb-3">
                             <label for="staff_id" class="form-label">Staff Member</label>
                             <select class="form-select" id="staff_id" name="staff_id" required>
@@ -48,7 +48,7 @@
                     </div>
 
                     <!-- Stock -->
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <div class="mb-3">
                             <label for="stock_id" class="form-label">Stock Item</label>
                             <select class="form-select" id="stock_id" name="stock_id" required>
@@ -62,6 +62,13 @@
                                 <?php endforeach; ?>
                             </select>
                         </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="mb-3">
+    <label for="used_quantity" class="form-label">Quantity Used</label>
+    <input type="number" class="form-control" id="used_quantity" name="used_quantity" min="1" required
+           value="<?php echo isset($_POST['used_quantity']) ? htmlspecialchars($_POST['used_quantity']) : ''; ?>">
+</div>
                     </div>
                 </div>
 

@@ -31,5 +31,20 @@ class PlanningModel extends Model {
         $stmt = $this->executeQuery($query);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+    public function create($data) {
+        $query = "INSERT INTO {$this->table} (name, start_time, end_time, description)
+                  VALUES (:name, :start_time, :end_time, :description)";
+        return $this->executeQuery($query, $data);
+    }
+
+    public function update($data) {
+        $query = "UPDATE {$this->table} SET 
+                  name = :name, 
+                  start_time = :start_time, 
+                  end_time = :end_time, 
+                  description = :description
+                  WHERE id = :id";
+        return $this->executeQuery($query, $data);
+    }
 }
 ?>

@@ -9,9 +9,20 @@ require_once __DIR__ . '/app/controllers/PlanningController.php';
 require_once __DIR__ . '/app/controllers/StockController.php';
 
 session_start();
+function isLoggedIn() {
+    return isset($_SESSION['user_id']);
+}
 
 // Parse the URL
 $request = $_SERVER['REQUEST_URI'];
+if ($request === '/' || $request === '/index.php') {
+    if (isLoggedIn()) {
+        header('Location: /dashboard');
+    } else {
+        header('Location: /login');
+    }
+    exit;
+}
 $base_path = '/';
 $request_path = parse_url($request, PHP_URL_PATH);
 $route = ltrim($request_path, '/');

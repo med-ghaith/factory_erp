@@ -17,19 +17,18 @@ class PlanningController extends Controller {
     }
 
     public function create() {
-       // $this->requireAdmin();
-        
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $data = [
+                'name' => $_POST['name'],
                 'start_time' => $_POST['start_time'],
                 'end_time' => $_POST['end_time'],
                 'description' => $_POST['description']
             ];
-            
+
             if ($this->planningModel->create($data)) {
                 $this->redirect('/planning');
             } else {
-                $error = "Failed to create planning";
+                $error = "Failed to create planning.";
                 $this->view('planning/create', ['error' => $error]);
             }
         } else {
@@ -38,20 +37,19 @@ class PlanningController extends Controller {
     }
 
     public function edit($id) {
-      //  $this->requireAdmin();
-        
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $data = [
                 'id' => $id,
+                'name' => $_POST['name'],
                 'start_time' => $_POST['start_time'],
                 'end_time' => $_POST['end_time'],
                 'description' => $_POST['description']
             ];
-            
+
             if ($this->planningModel->update($data)) {
                 $this->redirect('/planning');
             } else {
-                $error = "Failed to update planning";
+                $error = "Failed to update planning.";
                 $planning = $this->planningModel->getById($id);
                 $this->view('planning/edit', ['error' => $error, 'planning' => $planning]);
             }
@@ -60,7 +58,6 @@ class PlanningController extends Controller {
             $this->view('planning/edit', ['planning' => $planning]);
         }
     }
-
     public function delete($id) {
        // $this->requireAdmin();
         $this->planningModel->delete($id);

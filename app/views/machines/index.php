@@ -64,6 +64,52 @@
                     </li>
                 </ul>
             </div>
+            
+                                        <div class="modal fade" id="statusModal<?php echo $machine['id']; ?>" tabindex="-1">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title">Update Machine Status</h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                                    </div>
+                                                    <form method="POST" action="/machines/update-status/<?php echo $machine['id']; ?>">
+                                                        <div class="modal-body">
+                                                            <div class="mb-3">
+                                                                <label class="form-label">Status</label>
+                                                                <select name="status" class="form-select" required>
+                                                                    <option value="active" <?php echo $machine['status'] == 'active' ? 'selected' : ''; ?>>Active</option>
+                                                                    <option value="inactive" <?php echo $machine['status'] == 'inactive' ? 'selected' : ''; ?>>Inactive</option>
+                                                                    <option value="maintenance" <?php echo $machine['status'] == 'maintenance' ? 'selected' : ''; ?>>Maintenance</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                            <button type="submit" class="btn btn-primary">Update Status</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <!-- Delete Modal -->
+                                        <div class="modal fade" id="deleteModal<?php echo $machine['id']; ?>" tabindex="-1">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title">Delete Machine</h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <p>Are you sure you want to delete this machine?</p>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                        <a href="/machines/delete/<?php echo $machine['id']; ?>" class="btn btn-danger">Delete</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
         </td>
     </tr>
 

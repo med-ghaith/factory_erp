@@ -76,5 +76,18 @@ class StockModel extends Model {
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
         return $result['total'] ?? 0;
     }
+    public function getById($id) {
+    $query = "SELECT * FROM stock WHERE id = :id";
+    $stmt = $this->executeQuery($query, ['id' => $id]);
+    return $stmt->fetch(PDO::FETCH_ASSOC);
+}
+
+public function deductQuantity($stock_id, $used_quantity) {
+    $query = "UPDATE stock SET quantity = quantity - :used_quantity WHERE id = :stock_id AND quantity >= :used_quantity";
+    return $this->executeQuery($query, [
+        'stock_id' => $stock_id,
+        'used_quantity' => $used_quantity
+    ]);
+}
 }
 ?>
