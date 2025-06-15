@@ -98,11 +98,13 @@ function activeClass($segment) {
                         <i class="bi bi-clock-history"></i> History
                     </a>
                 </li>
+                <?php if (isset($_SESSION['user']) && $_SESSION['user']['role'] === 'admin'): ?>
                 <li class="nav-item">
                     <a class="nav-link <?= activeClass('reviews') ?>" href="<?= base_url('reviews') ?>">
                         <i class="bi bi-file-text"></i> Report
                     </a>
                 </li>
+                <?php endif; ?>
             </ul>
         </div>
         <div class="col-md-9 col-lg-10 main-content">

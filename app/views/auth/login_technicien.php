@@ -33,9 +33,9 @@
             <div class="form-login text-center">
                 <div class="parent d-flex justify-content-center align-items-center" style="height: 80vh;">
                     <div class="child">
-                        <form action="/login" method="post">
+                        <form action="/login_technicien" method="post">
                             <h4>Production System</h4>
-                            <h5 class="mt-3">Sign in by entering the information below</h5>
+                            <h5 class="mt-3">Technicien Sign in by entering the information below</h5>
                             <div class="form-group mt-5">
                                 <input type="text" class="form-control" placeholder="Matricule" name="matricule" required autofocus>
                             </div>
@@ -44,6 +44,9 @@
                                 <span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password"></span>
                             </div>
                             <button type="submit" class="btn btn-login bg-primary">LOGIN</button>
+                            <div class="mt-3">
+        <a href="/login_admin" class="btn btn-link">Admin Login</a>
+    </div>
                         </form>
                     </div>
                 </div>

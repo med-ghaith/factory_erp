@@ -23,7 +23,7 @@
                         <?php foreach ($stock as $item): ?>
                             <tr>
                                 <td><?php echo htmlspecialchars($item['matricule']); ?></td>
-                                <td><?php echo htmlspecialchars($item['machine_matricule']); ?></td>
+                                <td><?php echo htmlspecialchars($item['machine_matricules']); ?></td>
                                 <td><?php echo htmlspecialchars($item['description']); ?></td>
                                 <td>
                                     <span class="badge bg-<?php echo $item['quantity'] <= 5 ? 'danger' : 'success'; ?>">

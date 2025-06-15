@@ -30,25 +30,24 @@
                     <div class="col-md-6">
                         <div class="mb-3">
                             <label for="machine_id" class="form-label">Machine</label>
-                            <select 
-                                class="form-select" 
-                                id="machine_id" 
-                                name="machine_id" 
-                                required
-                            >
-                                <option value="">Select Machine</option>
-                                <?php foreach ($machines as $machine): ?>
-                                    <option 
-                                        value="<?php echo (int)$machine['id']; ?>" 
-                                        <?php echo ($machine['id'] == $stock['machine_id']) ? 'selected' : ''; ?>
-                                    >
-                                        <?php echo htmlspecialchars($machine['name']); ?>
-                                    </option>
-                                <?php endforeach; ?>
-                            </select>
-                            <?php if (!empty($errors['machine_id'])): ?>
-                                <div class="text-danger"><?php echo htmlspecialchars($errors['machine_id']); ?></div>
-                            <?php endif; ?>
+                           <select 
+    class="form-select" 
+    id="machine_ids" 
+    name="machine_ids[]" 
+    multiple 
+    required
+>
+    <?php foreach ($machines as $machine): ?>
+        <option 
+            value="<?php echo (int)$machine['id']; ?>"
+            <?php echo (in_array($machine['id'], $stock['machine_ids']) ? 'selected' : ''); ?>
+        >
+            <?php echo htmlspecialchars($machine['name']); ?>
+        </option>
+    <?php endforeach; ?>
+</select>
+<small class="form-text text-muted">Hold Ctrl (Windows) or Cmd (Mac) to select multiple machines.</small>
+
                         </div>
                     </div>
                 </div>

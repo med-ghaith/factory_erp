@@ -11,7 +11,7 @@ class AuthController extends Controller {
         
     }
 
-    public function login() {
+    public function login($role = 'admin') {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $matricule = $_POST['matricule'] ?? '';
             $password = $_POST['password'] ?? '';
@@ -25,16 +25,16 @@ class AuthController extends Controller {
                 $this->redirect('/dashboard');
             } else {
                 $error = "Invalid credentials";
-                $this->view('auth/login', ['error' => $error], false);
+                $this->view("auth/login_$role", ['error' => $error], false);
             }
         } else {
-            $this->view('auth/login', [],false);
+            $this->view("auth/login_$role", [],false);
         }
     }
 
     public function logout() {
         session_destroy();
-        $this->redirect('/login');
+        $this->redirect('/login_admin');
     }
 }
 ?>

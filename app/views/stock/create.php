@@ -29,20 +29,15 @@
                     
                     <div class="col-md-6">
                         <div class="mb-3">
-                            <label for="machine_id" class="form-label">Machine</label>
-                            <select class="form-select <?php echo isset($errors['machine_id']) ? 'is-invalid' : ''; ?>" 
-                                    id="machine_id" name="machine_id" required>
-                                <option value="">Select Machine</option>
-                                <?php foreach($machines as $machine): ?>
-                                    <option value="<?php echo htmlspecialchars($machine['id']); ?>"
-                                        <?php echo (isset($data['machine_id']) && $data['machine_id'] == $machine['id']) ? 'selected' : ''; ?>>
-                                        <?php echo htmlspecialchars($machine['name']); ?>
-                                    </option>
-                                <?php endforeach; ?>
-                            </select>
-                            <?php if (isset($errors['machine_id'])): ?>
-                                <div class="invalid-feedback"><?php echo htmlspecialchars($errors['machine_id']); ?></div>
-                            <?php endif; ?>
+                           <label for="machine_ids" class="form-label">Machines</label>
+<select name="machine_ids[]" id="machine_ids" class="form-select" multiple required>
+    <?php foreach($machines as $machine): ?>
+        <option value="<?= htmlspecialchars($machine['id']) ?>">
+            <?= htmlspecialchars($machine['name']) ?>
+        </option>
+    <?php endforeach; ?>
+</select>
+<small class="form-text text-muted">Hold Ctrl (or Cmd on Mac) to select multiple.</small>
                         </div>
                     </div>
                 </div>

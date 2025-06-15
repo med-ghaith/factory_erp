@@ -19,7 +19,7 @@ if ($request === '/' || $request === '/index.php') {
     if (isLoggedIn()) {
         header('Location: /dashboard');
     } else {
-        header('Location: /login');
+        header('Location: /login_admin');
     }
     exit;
 }
@@ -35,9 +35,13 @@ $param = $parts[2] ?? null;
 
 // Map URL to controllers
 switch ($controller_name) {
-    case 'login':
+    case 'login_admin':
         $controller = new AuthController();
-        $controller->login();
+        $controller->login('admin');
+        break;
+    case 'login_technicien':
+        $controller = new AuthController();
+        $controller->login('technicien');
         break;
     case 'logout':
         $controller = new AuthController();
